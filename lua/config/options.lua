@@ -16,7 +16,7 @@ vim.opt.scrolloff = 15 -- Minimal number of screen lines to keep above and below
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
-    vim.opt.clipboard = "unnamedplus"
+	vim.opt.clipboard = "unnamedplus"
 end)
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
@@ -28,12 +28,11 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
-vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣"}
+-- vim.opt.list = true
+-- vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣"}
 
 -- Folding settings
-vim.opt.foldmethod = "expr"                  -- Use Treesitter for folds
+vim.opt.foldmethod = "expr" -- Use Treesitter for folds
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldlevel = 99                        -- Start with all folds open
-vim.opt.foldenable = true                     -- Enable folding globally
-
+vim.opt.foldlevel = 99 -- Start with all folds open
+vim.opt.foldenable = true -- Enable folding globally

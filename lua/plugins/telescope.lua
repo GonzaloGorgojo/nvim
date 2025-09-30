@@ -15,6 +15,21 @@ return { -- Fuzzy Finder (files, lsp, etc)
 	},
 	config = function()
 		require("telescope").setup({
+			defaults = {
+				layout_strategy = "flex", -- 👈 key: flex adapts automatically
+				layout_config = {
+					horizontal = {
+						preview_width = 0.55, -- preview takes ~55% width
+					},
+					vertical = {
+						preview_height = 0.4, -- preview takes ~40% height
+					},
+					flex = {
+						flip_columns = 120, -- 👈 switch to vertical if width < 120 cols
+					},
+				},
+				file_ignore_patterns = { "node_modules", ".git/" }, -- still ignore noisy dirs
+			},
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
@@ -30,29 +45,52 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		local builtin = require("telescope.builtin")
 		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-		vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
+		vim.keymap.set("n", "<leader>sf", function()
+			builtin.find_files({ hidden = true, no_ignore = true })
+		end, { desc = "[S]earch [F]iles" })
 		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+		vim.keymap.set("n", "<leader>lD", builtin.diagnostics, { desc = "[L]SP workspace diagnostics" })
 		vim.keymap.set("n", "<leader>ld", function()
 			builtin.diagnostics({ bufnr = 0 })
 		end, { desc = "[L]SP buffer diagnostics" })
-		vim.keymap.set("n", "<leader>lD", builtin.diagnostics, { desc = "[L]SP workspace diagnostics" })
+
+		vim.keymap.set("n", "<leader>fgc", function()
+			builtin.live_grep({
+				grep_open_files = false,
+				search_dirs = vim.fn.systemlist("git diff --name-only"),
+				prompt_title = "Live Grep in Git Changed Files",
+			})
+		end, { desc = "Search in [G]it [C]hanged files" })
+
+		-- Or: just fuzzy-find filenames of changed files
+		vim.keymap.set("n", "<leader>fc", function()
+			builtin.find_files({
+				find_command = { "git", "diff", "--name-only" },
+				prompt_title = "Find Git Changed Files",
+			})
+		end, { desc = "[S]earch [F]iles [C]hanged" })
+
+		--GIT TELESCOPE--
+		vim.keymap.set("n", "<leader>sc", function()
+			builtin.git_status()
+		end, { desc = "[S]how git status" })
+
+		vim.keymap.set("n", "<leader>ss", function()
+			builtin.git_stash()
+		end, { desc = "[S]how git stashs" })
 
 		-- Slightly advanced example of overriding default behavior and theme
 		vim.keymap.set("n", "<leader>/", function()
-			-- You can pass additional configuration to Telescope to change the theme, layout, etc.
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 				winblend = 10,
 				previewer = false,
 			}))
 		end, { desc = "[/] Fuzzily search in current buffer" })
 
-		-- It's also possible to pass additional configuration options.
-		--  See `:help telescope.builtin.live_grep()` for information about particular keys
 		vim.keymap.set("n", "<leader>s/", function()
 			builtin.live_grep({
 				grep_open_files = true,

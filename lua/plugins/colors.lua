@@ -5,8 +5,8 @@ return {
 		priority = 1000, -- ensure colorscheme loads first
 		config = function()
 			require("tokyonight").setup({
-				style = "storm", -- or "night", "day"
-				transparent = true, -- makes background transparent
+				style = "night", -- or "night", "daA"
+				-- transparent = true, -- makes background transparent
 				terminal_colors = true, -- match terminal colors
 				styles = {
 					sidebars = "transparent",
