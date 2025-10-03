@@ -14,10 +14,14 @@ vim.keymap.set("n", "<leader>bd", ":bufdo bdelete<CR>", { desc = "Close all buff
 -- Normal mode: jump 10 lines with Ctrl + Down / Ctrl + Up
 vim.keymap.set("n", "<M-Down>", "10j", { noremap = true, silent = true, desc = "Jump 10 lines down" })
 vim.keymap.set("n", "<M-Up>", "10k", { noremap = true, silent = true, desc = "Jump 10 lines Up" })
+vim.keymap.set("n", "<M-Left>", "10h", { noremap = true, silent = true, desc = "Jump 10 lines right" })
+vim.keymap.set("n", "<M-Right>", "10l", { noremap = true, silent = true, desc = "Jump 10 lines left" })
 
 -- Visual mode (optional)
 vim.keymap.set("v", "<M-Down>", "10j", { noremap = true, silent = true, desc = "Jump 10 lines down" })
 vim.keymap.set("v", "<M-Up>", "10k", { noremap = true, silent = true, desc = "Jump 10 lines up" })
+vim.keymap.set("v", "<M-Left>", "10h", { noremap = true, silent = true, desc = "Jump 10 lines right" })
+vim.keymap.set("v", "<M-Right>", "10l", { noremap = true, silent = true, desc = "Jump 10 lines left" })
 
 --TERMINAL--
 vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
