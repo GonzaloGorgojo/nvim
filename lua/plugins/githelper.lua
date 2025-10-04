@@ -36,7 +36,7 @@ return {
 			map("n", "<leader>gs", gs.stage_hunk, "Stage Git hunk")
 			map("n", "<leader>gr", gs.reset_hunk, "Reset Git hunk")
 			map("n", "<leader>gu", gs.undo_stage_hunk, "Undo stage hunk")
-			map("n", "<leader>gR", gs.reset_buffer)
+			map("n", "<leader>gR", gs.reset_buffer, "Reset all changes in current buffer")
 			-- Blame
 			map("n", "<leader>gb", gs.toggle_current_line_blame, "Toggle Git blame")
 

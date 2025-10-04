@@ -43,7 +43,10 @@ return {
 
 				json = { "prettierd", "prettier" },
 				css = { "prettierd", "prettier" },
+				scss = { "prettierd", "prettier" },
 				markdown = { "prettierd", "prettier" },
+
+				go = { "gofmt" },
 			},
 		},
 	},

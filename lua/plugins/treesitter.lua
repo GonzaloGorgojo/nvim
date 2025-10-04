@@ -3,12 +3,23 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		dependencies = {
+			"windwp/nvim-ts-autotag", -- auto-close/rename HTML/JSX tags
+		},
 		config = function()
 			local configs = require("nvim-treesitter.configs")
 			configs.setup({
 				highlight = { enable = true }, -- code highlighting
 				indent = { enable = true }, -- smart indentation
-				autotag = { enable = true }, -- auto-closing HTML/JSX tags
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+						init_selection = "gnn",
+						node_incremental = "grn",
+						node_decremental = "grm",
+						scope_incremental = "grc",
+					},
+				},
 				ensure_installed = {
 					"lua",
 					"go",
@@ -31,6 +42,7 @@ return {
 				},
 				auto_install = true, -- automatically install missing parsers
 			})
+			require("nvim-ts-autotag").setup()
 		end,
 	},
 
