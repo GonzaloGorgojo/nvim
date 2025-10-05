@@ -25,6 +25,7 @@ vim.keymap.set("v", "<M-Right>", "10l", { noremap = true, silent = true, desc = 
 
 --TERMINAL--
 vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
+vim.keymap.set("n", "<leader>vt", "<cmd>:2ToggleTerm<CR>", { desc = "Create second terminal vertical" })
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 --FILE TREE--

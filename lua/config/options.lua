@@ -1,3 +1,7 @@
+-- disable netrw to use nvim.tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.opt.number = true -- numbers on lines
 vim.opt.cursorline = true --show the line that im in with color
 vim.opt.relativenumber = true --relative numbers on lines to jump

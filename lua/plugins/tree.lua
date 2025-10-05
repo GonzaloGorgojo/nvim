@@ -4,8 +4,14 @@ return {
 		require("nvim-tree").setup({
 			-- Customize the settings if necessary
 			view = {
-				width = 30, -- Set the width of the file tree
-				side = "right",
+				-- width = 30, -- Set the width of the file tree
+				-- side = "right",
+				float = {
+					enable = true,
+					open_win_config = {
+						height = 45,
+					},
+				},
 			},
 			renderer = {
 				highlight_opened_files = "name", -- Highlight opened files in the tree
@@ -31,7 +37,7 @@ return {
 				enable = true,
 				show_on_dirs = true, -- only show on files
 				show_on_open_dirs = true,
-				-- debounce_delay = 50,
+				debounce_delay = 50,
 				icons = {
 					hint = "󰌶 ",
 					info = "󰋽 ",
