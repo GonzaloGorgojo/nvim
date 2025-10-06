@@ -17,5 +17,12 @@ return {
 		end
 
 		vim.keymap.set("n", "<leader>d", _lazydocker_toggle, { desc = "Toggle Lazydocker (float)" })
+
+		vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<CR>", { desc = "Toggle Terminal" })
+		vim.keymap.set("n", "<leader>vt", "<cmd>:2ToggleTerm<CR>", { desc = "Create second terminal vertical" })
+		vim.keymap.set("n", "<leader>ft", function()
+			require("toggleterm").toggle(3, nil, nil, "float")
+		end, { desc = "Toggle floating terminal #3" })
+		vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 	end,
 }

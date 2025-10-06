@@ -57,7 +57,28 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		vim.keymap.set("n", "<leader>ld", function()
 			builtin.diagnostics({ bufnr = 0 })
 		end, { desc = "[L]SP buffer diagnostics" })
-
+		vim.keymap.set("n", "<C-Tab>", function()
+			builtin.buffers({
+				sort_mru = true,
+				ignore_current_buffer = true,
+				show_all_buffers = false,
+				previewer = false,
+				theme = "dropdown",
+				layout_config = { width = 0.4 },
+				mappings = {
+					i = {
+						["<CR>"] = "select_default", -- Enter to open
+						["<Tab>"] = "move_selection_next", -- Tab to move down
+						["<S-Tab>"] = "move_selection_previous", -- Shift-Tab to move up
+					},
+					n = {
+						["<CR>"] = "select_default",
+						["<Tab>"] = "move_selection_next",
+						["<S-Tab>"] = "move_selection_previous",
+					},
+				},
+			})
+		end, { desc = "Switch buffers (MRU order like VSCode)" })
 		vim.keymap.set("n", "<leader>fgc", function()
 			builtin.live_grep({
 				grep_open_files = false,

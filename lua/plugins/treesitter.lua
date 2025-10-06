@@ -53,7 +53,7 @@ return {
 		config = function()
 			require("treesitter-context").setup({
 				enable = true, -- enable plugin
-				max_lines = 5, -- max number of lines to show at top
+				max_lines = 1, -- max number of lines to show at top
 				min_window_height = 0, -- show even in small windows
 				trim_scope = "outer", -- show outer scope
 				patterns = {
