@@ -63,8 +63,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				ignore_current_buffer = true,
 				show_all_buffers = false,
 				previewer = false,
-				theme = "dropdown",
-				layout_config = { width = 0.4 },
 				mappings = {
 					i = {
 						["<CR>"] = "select_default", -- Enter to open
