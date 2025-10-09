@@ -6,11 +6,11 @@ return {
 		config = function()
 			require("tokyonight").setup({
 				style = "night", -- or "night", "daA"
-				-- transparent = true, -- makes background transparent
+				transparent = true, -- makes background transparent
 				terminal_colors = true, -- match terminal colors
 				styles = {
 					sidebars = "transparent",
-					floats = "transparent",
+					-- floats = "transparent",
 				},
 			})
 			vim.cmd([[colorscheme tokyonight]])
@@ -22,8 +22,8 @@ return {
 		opts = {
 			theme = "tokyonight", -- match colorscheme
 			options = {
-				section_separators = "",
-				component_separators = "",
+				section_separators = { left = "", right = "" },
+				component_separators = { left = "", right = "" },
 				globalstatus = true,
 			},
 		},
@@ -57,12 +57,6 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			-- Telescope floats inherit colorscheme, transparent will work automatically
-			require("telescope").setup({
-				defaults = {
-					winblend = 20, -- transparency for telescope popup
-					border = {},
-				},
-			})
 		end,
 	},
 }
