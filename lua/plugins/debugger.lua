@@ -206,6 +206,20 @@ return {
 					skipFiles = { "<node_internals>/**" },
 					console = "integratedTerminal",
 				},
+				{
+					type = "pwa-node",
+					request = "launch",
+					name = "NVIM Launch backend",
+					args = { "prisma dev" },
+					program = "${workspaceFolder}/src/main.ts",
+					cwd = "${workspaceFolder}/src",
+					env = function()
+						local env_path = vim.fn.getcwd() .. "/.env"
+						return read_env_file(env_path)
+					end,
+					skipFiles = { "<node_internals>/**" },
+					console = "integratedTerminal",
+				},
 			}
 
 			-- Also set up for TypeScript files

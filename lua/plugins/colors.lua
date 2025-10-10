@@ -9,7 +9,7 @@ return {
 				transparent = true, -- makes background transparent
 				terminal_colors = true, -- match terminal colors
 				styles = {
-					sidebars = "transparent",
+					-- sidebars = "transparent",
 					-- floats = "transparent",
 				},
 			})
@@ -45,18 +45,11 @@ return {
 		},
 		config = function(_, opts)
 			require("nvim-tree").setup(opts)
-
-			-- Optional: make NvimTree fully transparent
-			vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
-			vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", { bg = "none" })
-			vim.api.nvim_set_hl(0, "NvimTreeOpenedFile", { bg = "none", fg = "#c0caf5" })
 		end,
 	},
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			-- Telescope floats inherit colorscheme, transparent will work automatically
-		end,
+		config = function() end,
 	},
 }

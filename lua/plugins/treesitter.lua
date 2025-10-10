@@ -11,6 +11,9 @@ return {
 			configs.setup({
 				highlight = { enable = true }, -- code highlighting
 				indent = { enable = true }, -- smart indentation
+				folds = {
+					enable = true,
+				},
 				incremental_selection = {
 					enable = true,
 					keymaps = {
@@ -39,6 +42,7 @@ return {
 					"query",
 					"vim",
 					"vimdoc",
+					"prisma",
 				},
 				auto_install = true, -- automatically install missing parsers
 			})
