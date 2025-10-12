@@ -220,6 +220,19 @@ return {
 					skipFiles = { "<node_internals>/**" },
 					console = "integratedTerminal",
 				},
+				{
+					type = "pwa-node",
+					request = "launch",
+					name = "Yarn Prisma Seed",
+					cwd = "${workspaceFolder}",
+					runtimeExecutable = "yarn",
+					runtimeArgs = { "prisma:seed" },
+					console = "integratedTerminal",
+					env = function()
+						local env_path = vim.fn.getcwd() .. "/.env"
+						return read_env_file(env_path)
+					end,
+				},
 			}
 
 			-- Also set up for TypeScript files

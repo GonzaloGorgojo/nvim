@@ -15,7 +15,7 @@ return {
 
 		"folke/todo-comments.nvim",
 		event = "VimEnter",
-		bependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = { signs = false },
 	},
 	{ -- Collection of small plugins bundled together

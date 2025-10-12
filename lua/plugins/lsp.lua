@@ -132,8 +132,10 @@ return {
 					mode = mode or "n"
 					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 				end
-
 				-- LSP navigation
+				vim.keymap.set("n", "gr", function()
+					require("telescope.builtin").lsp_references({ previewer = true, show_line = false })
+				end, { desc = "[G]oto [R]eferences" })
 				map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 				map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
