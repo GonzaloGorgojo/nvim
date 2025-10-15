@@ -20,24 +20,15 @@ return {
 		},
 		signs_staged_enable = true,
 		current_line_blame = true, -- Show blame info at end of line
-		watch_gitdir = { follow_files = true },
+		watch_gitdir = { follow_files = true, interval = 1000 },
 		auto_attach = true,
 		attach_to_untracked = false,
-		update_debounce = 100,
+		update_debounce = 200,
 	},
 
 	config = function(_, opts)
 		local gitsigns = require("gitsigns")
 		gitsigns.setup(opts)
-
-		-- Auto-refresh Git signs
-		vim.api.nvim_create_autocmd({ "BufWritePost", "FocusGained", "BufEnter" }, {
-			callback = function()
-				if package.loaded["gitsigns"] then
-					require("gitsigns").refresh()
-				end
-			end,
-		})
 
 		-- Manual refresh
 		vim.keymap.set("n", "<leader>gS", function()

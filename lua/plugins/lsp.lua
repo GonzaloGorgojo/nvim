@@ -50,16 +50,6 @@ return {
 				["<C-y>"] = cmp.mapping.confirm({ select = true }),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
 				["<C-Space>"] = cmp.mapping.complete({}),
-				["<C-l>"] = cmp.mapping(function()
-					if luasnip.expand_or_locally_jumpable() then
-						luasnip.expand_or_jump()
-					end
-				end, { "i", "s" }),
-				["<C-h>"] = cmp.mapping(function()
-					if luasnip.locally_jumpable(-1) then
-						luasnip.jump(-1)
-					end
-				end, { "i", "s" }),
 			}),
 			sources = {
 				{ name = "nvim_lsp" },
@@ -150,25 +140,22 @@ return {
 				-- Highlight references
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if client and client.supports_method("textDocument/documentHighlight", event.buf) then
-					local highlight_group = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
+					-- Use buffer-specific group name to avoid conflicts
+					local highlight_group = vim.api.nvim_create_augroup("lsp-highlight-" .. event.buf, { clear = true })
+
 					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 						buffer = event.buf,
 						group = highlight_group,
 						callback = vim.lsp.buf.document_highlight,
 					})
+
 					vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
 						buffer = event.buf,
 						group = highlight_group,
 						callback = vim.lsp.buf.clear_references,
 					})
-					vim.api.nvim_create_autocmd("LspDetach", {
-						group = vim.api.nvim_create_augroup("lsp-detach", { clear = true }),
-						callback = function(event2)
-							vim.lsp.buf.clear_references()
-							vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = event2.buf })
-						end,
-					})
 				end
+
 				-- Inlay hints toggle
 				if client and client.supports_method("textDocument/inlayHint", event.buf) then
 					map("<leader>th", function()
