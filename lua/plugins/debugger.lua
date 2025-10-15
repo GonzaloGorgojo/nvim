@@ -135,6 +135,26 @@ return {
 			local dap = require("dap")
 			local dapui = require("dapui")
 
+			local has_mason_dap, mason_dap = pcall(require, "mason-nvim-dap")
+			if has_mason_dap then
+				mason_dap.setup({ automatic_installation = true, ensure_installed = { "js" } })
+			end
+
+			vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+			local dap_icons = {
+				Stopped = { "", "DapStoppedLine" },
+				Breakpoint = { "", "DiagnosticError" },
+				BreakpointCondition = { "", "DiagnosticWarn" },
+				BreakpointRejected = { "", "DiagnosticInfo" },
+				LogPoint = { "", "DiagnosticInfo" },
+			}
+			for name, sign in pairs(dap_icons) do
+				vim.fn.sign_define(
+					"Dap" .. name,
+					{ text = sign[1], texthl = sign[2], linehl = sign[3], numhl = sign[3] }
+				)
+			end
+
 			-- Setup DAP UI
 			dapui.setup({
 				layouts = {
