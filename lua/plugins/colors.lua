@@ -28,28 +28,4 @@ return {
 			},
 		},
 	},
-	{
-		"nvim-tree/nvim-tree.lua",
-		opts = {
-			renderer = {
-				highlight_opened_files = "all",
-				highlight_git = true,
-			},
-			view = {
-				width = 30,
-				side = "left",
-			},
-			filters = {
-				dotfiles = false,
-			},
-		},
-		config = function(_, opts)
-			require("nvim-tree").setup(opts)
-		end,
-	},
-	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function() end,
-	},
 }

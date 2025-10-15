@@ -15,6 +15,7 @@ return {
 			},
 			renderer = {
 				highlight_opened_files = "name", -- Highlight opened files in the tree
+				highlight_git = true,
 				icons = {
 					show = {
 						git = true, -- Show git icons
