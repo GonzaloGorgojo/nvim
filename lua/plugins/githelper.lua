@@ -30,6 +30,21 @@ return {
 		local gitsigns = require("gitsigns")
 		gitsigns.setup(opts)
 
+		-- Auto-refresh Git signs
+		vim.api.nvim_create_autocmd({ "BufWritePost", "FocusGained", "BufEnter" }, {
+			callback = function()
+				if package.loaded["gitsigns"] then
+					require("gitsigns").refresh()
+				end
+			end,
+		})
+
+		-- Manual refresh
+		vim.keymap.set("n", "<leader>gS", function()
+			require("gitsigns").refresh()
+			vim.notify("🔄 Gitsigns refreshed", vim.log.levels.INFO)
+		end, { desc = "Refresh Git signs" })
+
 		-- Keymaps for git hunk actions
 		local map = function(mode, lhs, rhs, desc)
 			vim.keymap.set(mode, lhs, rhs, { desc = desc })
