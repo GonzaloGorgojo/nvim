@@ -268,30 +268,37 @@ return {
 					type = "pwa-node",
 					request = "launch",
 					name = "NVIM Launch backend",
-					program = "${workspaceFolder}/dist/main.js",
-					protocol = "inspector",
-					cwd = "${workspaceFolder}/src",
-					runtimeExecutable = "yarn",
+					cwd = "${workspaceFolder}", -- project root
+					runtimeExecutable = "yarn", -- runs `yarn`
+					runtimeArgs = { "dev" }, -- passes `dev` to yarn
+					program = "${workspaceFolder}/src/main.ts", -- required by pwa-node but ignored for yarn scripts
 					console = "integratedTerminal",
-					args = { "dev" },
 					env = function()
-						local env_path = vim.fn.getcwd() .. "/.env"
-						return read_env_file(env_path)
+						local env_path = vim.fn.expand("${workspaceFolder}") .. "/.env"
+						local env = read_env_file(env_path)
+						return env
 					end,
 					skipFiles = { "<node_internals>/**" },
+					sourceMaps = true,
+					protocol = "inspector",
 				},
 				{
 					type = "pwa-node",
 					request = "launch",
-					name = "NVIM backend Seed",
-					cwd = "${workspaceFolder}",
-					runtimeExecutable = "yarn",
-					runtimeArgs = { "prisma:seed" },
+					name = "NVIM Launch Seed",
+					cwd = "${workspaceFolder}", -- project root
+					runtimeExecutable = "yarn", -- runs `yarn`
+					runtimeArgs = { "prisma:seed" }, -- passes `dev` to yarn
+					program = "${workspaceFolder}/src/main.ts", -- required by pwa-node but ignored for yarn scripts
 					console = "integratedTerminal",
 					env = function()
-						local env_path = vim.fn.getcwd() .. "/.env"
-						return read_env_file(env_path)
+						local env_path = vim.fn.expand("${workspaceFolder}") .. "/.env"
+						local env = read_env_file(env_path)
+						return env
 					end,
+					skipFiles = { "<node_internals>/**" },
+					sourceMaps = true,
+					protocol = "inspector",
 				},
 			}
 		end,
