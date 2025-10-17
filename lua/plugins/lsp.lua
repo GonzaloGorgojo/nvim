@@ -41,15 +41,12 @@ return {
 					luasnip.lsp_expand(args.body)
 				end,
 			},
-			completion = { completeopt = "menu,menuone,noinsert" },
+
+			completion = { completeopt = "menu,menuone,noinsert,noselect" },
 			mapping = cmp.mapping.preset.insert({
 				["<C-n>"] = cmp.mapping.select_next_item(),
 				["<C-p>"] = cmp.mapping.select_prev_item(),
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
-				["<C-y>"] = cmp.mapping.confirm({ select = true }),
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
-				["<C-Space>"] = cmp.mapping.complete({}),
+				["<C-Enter>"] = cmp.mapping.confirm({ select = true }),
 			}),
 			sources = {
 				{ name = "nvim_lsp" },
@@ -131,7 +128,6 @@ return {
 				map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 				map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 				map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-				map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
 				-- LSP actions
 				map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
