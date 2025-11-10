@@ -251,7 +251,7 @@ return {
 						"--timeout",
 						"0",
 						"${workspaceFolder}/test/integration/_beforeAll.test.js",
-						"${workspaceFolder}/test/integration/VELO-5013-rewards-promo-codes.js",
+						"${workspaceFolder}/test/integration/VELO-2902-new-bucket-logic.js",
 					},
 					cwd = "${workspaceFolder}",
 					env = function()

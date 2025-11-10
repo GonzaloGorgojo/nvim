@@ -9,7 +9,11 @@ return {
 				float = {
 					enable = true,
 					open_win_config = {
-						height = 45,
+						relative = "editor",
+						height = vim.o.lines - 4,
+						width = 45,
+						col = 0,
+						row = 0,
 					},
 				},
 			},

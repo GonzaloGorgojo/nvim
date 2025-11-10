@@ -47,9 +47,3 @@ end
 -- Sets how neovim will display certain whitespace characters in the editor.
 -- vim.opt.list = true
 -- vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣"}
-
--- Folding settings
-vim.opt.foldmethod = "expr" -- Use Treesitter for folds
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldlevel = 99 -- Start with all folds open
-vim.opt.foldenable = true -- Enable folding globally

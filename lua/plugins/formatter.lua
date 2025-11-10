@@ -38,6 +38,23 @@ return {
 				end,
 				desc = "Toggle autoformat globally",
 			},
+			{
+				"<leader>fs",
+				function()
+					local start = vim.api.nvim_buf_get_mark(0, "<")
+					local finish = vim.api.nvim_buf_get_mark(0, ">")
+
+					require("conform").format({
+						range = {
+							start = { start[1], start[2] },
+							["end"] = { finish[1], finish[2] },
+						},
+						lsp_format = "fallback",
+					})
+				end,
+				mode = "v",
+				desc = "Format selected lines",
+			},
 		},
 		opts = {
 			notify_on_error = false,

@@ -8,12 +8,17 @@ vim.keymap.set("n", "<C-Down>", "<C-w><C-j>", { desc = "Move focus to the lower 
 vim.keymap.set("n", "<C-Up>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 vim.keymap.set("n", "<leader>w", ":write<CR>", { desc = "Save ([W]rite) file" })
 
--- Normal mode: jump 10 lines with Ctrl + Down / Ctrl + Up
+-- jump 10 lines with Ctrl + Down / Ctrl + Up
 vim.keymap.set("n", "<M-Down>", "10j", { noremap = true, silent = true, desc = "Jump 10 lines down" })
 vim.keymap.set("n", "<M-Up>", "10k", { noremap = true, silent = true, desc = "Jump 10 lines Up" })
--- Visual mode (optional)
 vim.keymap.set("v", "<M-Down>", "10j", { noremap = true, silent = true, desc = "Jump 10 lines down" })
 vim.keymap.set("v", "<M-Up>", "10k", { noremap = true, silent = true, desc = "Jump 10 lines up" })
+
+-- jump 10 lines with Ctrl + Down / Ctrl + Up
+vim.keymap.set("n", "<M-j>", "10j", { noremap = true, silent = true, desc = "Jump 10 lines down" })
+vim.keymap.set("n", "<M-k>", "10k", { noremap = true, silent = true, desc = "Jump 10 lines Up" })
+vim.keymap.set("v", "<M-j>", "10j", { noremap = true, silent = true, desc = "Jump 10 lines down" })
+vim.keymap.set("v", "<M-k>", "10k", { noremap = true, silent = true, desc = "Jump 10 lines up" })
 
 -- Move Lines up/down
 vim.keymap.set("n", "<C-j>", ":m .+1<CR>==", { desc = "Move line down", silent = true })
@@ -21,7 +26,7 @@ vim.keymap.set("n", "<C-k>", ":m .-2<CR>==", { desc = "Move line up", silent = t
 vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up", silent = true })
 vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down", silent = true })
 
---FILE TREE--
+--Open FILE TREE--
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>e",

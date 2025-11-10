@@ -11,9 +11,7 @@ return {
 			configs.setup({
 				highlight = { enable = true }, -- code highlighting
 				indent = { enable = true }, -- smart indentation
-				folds = {
-					enable = true,
-				},
+				folds = { enable = true },
 				incremental_selection = {
 					enable = true,
 					keymaps = {
@@ -46,6 +44,15 @@ return {
 				},
 				auto_install = true, -- automatically install missing parsers
 			})
+
+			vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+				callback = function()
+					vim.opt_local.foldmethod = "expr"
+					vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
+					vim.opt_local.foldlevel = 99
+				end,
+			})
+
 			require("nvim-ts-autotag").setup()
 		end,
 	},
@@ -56,12 +63,12 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
 			require("treesitter-context").setup({
-				enable = true, -- enable plugin
-				max_lines = 1, -- max number of lines to show at top
-				min_window_height = 0, -- show even in small windows
-				trim_scope = "outer", -- show outer scope
+				enable = true,
+				max_lines = 1,
+				min_window_height = 0,
+				trim_scope = "outer",
 				patterns = {
-					default = { "class", "function", "method" }, -- fallback for any language
+					default = { "class", "function", "method" },
 					lua = { "function", "local_function" },
 					go = { "func", "method_declaration" },
 					javascript = { "function", "method", "class" },
