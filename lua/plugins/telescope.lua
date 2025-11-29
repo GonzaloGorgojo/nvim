@@ -14,6 +14,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		{ "nvim-telescope/telescope-ui-select.nvim" },
 	},
 	config = function()
+		local actions = require("telescope.actions")
 		require("telescope").setup({
 			defaults = {
 				initial_mode = "normal",
@@ -30,6 +31,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
 					},
 				},
 				file_ignore_patterns = { "node_modules", ".git/" }, -- still ignore noisy dirs
+				mappings = {
+					i = {
+						["<C-j>"] = actions.preview_scrolling_down,
+						["<C-k>"] = actions.preview_scrolling_up,
+					},
+					n = {
+						["<C-j>"] = actions.preview_scrolling_down,
+						["<C-k>"] = actions.preview_scrolling_up,
+					},
+				},
 			},
 			pickers = {
 				find_files = {

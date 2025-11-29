@@ -12,7 +12,7 @@ return {
 						relative = "editor",
 						height = vim.o.lines - 4,
 						width = 45,
-						col = 0,
+						col = 999,
 						row = 0,
 					},
 				},

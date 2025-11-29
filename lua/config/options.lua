@@ -27,7 +27,6 @@ vim.opt.swapfile = false --disable swap files that are created to protect for mu
 vim.schedule(function()
 	vim.opt.clipboard = "unnamedplus"
 end)
-
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
