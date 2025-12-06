@@ -77,6 +77,8 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				html = { "prettierd", "prettier" },
+				yaml = { "prettierd", "prettier" },
+				yml = { "prettierd", "prettier" },
 
 				-- JavaScript / TypeScript / React
 				javascript = { "eslint_d", "prettierd", "prettier" },

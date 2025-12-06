@@ -251,7 +251,7 @@ return {
 						"--timeout",
 						"0",
 						"${workspaceFolder}/test/integration/_beforeAll.test.js",
-						"${workspaceFolder}/test/integration/VELO-6692-refactor-evaluate-streak-campaign-and-add-restart-logic.js",
+						"${workspaceFolder}/test/integration/VELO-6721-program-with-ticket-as-distribution.js",
 					},
 					cwd = "${workspaceFolder}",
 					env = function()

@@ -11,10 +11,6 @@ vim.keymap.set("n", "<S-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<S-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- jump 10 lines
-vim.keymap.set("n", "<M-Down>", "10j", { noremap = true, silent = true, desc = "Jump 10 lines down" })
-vim.keymap.set("n", "<M-Up>", "10k", { noremap = true, silent = true, desc = "Jump 10 lines Up" })
-vim.keymap.set("v", "<M-Down>", "10j", { noremap = true, silent = true, desc = "Jump 10 lines down" })
-vim.keymap.set("v", "<M-Up>", "10k", { noremap = true, silent = true, desc = "Jump 10 lines up" })
 vim.keymap.set("n", "<M-j>", "10j", { noremap = true, silent = true, desc = "Jump 10 lines down" })
 vim.keymap.set("n", "<M-k>", "10k", { noremap = true, silent = true, desc = "Jump 10 lines Up" })
 vim.keymap.set("v", "<M-j>", "10j", { noremap = true, silent = true, desc = "Jump 10 lines down" })
@@ -27,6 +23,12 @@ vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up", s
 vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down", silent = true })
 vim.keymap.set("i", "<C-j>", "<Esc>:m .+1<CR>==gi")
 vim.keymap.set("i", "<C-k>", "<Esc>:m .-2<CR>==gi")
+
+-- Resize splits with Alt (Option) + Arrow
+vim.keymap.set("n", "<A-Up>", ":resize +5<CR>", { silent = true })
+vim.keymap.set("n", "<A-Down>", ":resize -5<CR>", { silent = true })
+vim.keymap.set("n", "<A-Left>", ":vertical resize -5<CR>", { silent = true })
+vim.keymap.set("n", "<A-Right>", ":vertical resize +5<CR>", { silent = true })
 
 --Open FILE TREE--
 vim.api.nvim_set_keymap(
