@@ -1,8 +1,7 @@
 return {
 	{ -- Autoformat
 		"stevearc/conform.nvim",
-		event = { "BufWritePre" },
-		cmd = { "ConformInfo" },
+		event = "VeryLazy",
 		keys = {
 			{
 				"<leader>fb",

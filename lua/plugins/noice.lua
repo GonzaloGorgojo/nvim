@@ -6,7 +6,6 @@ return {
 			vim.notify = require("notify")
 		end,
 	},
-
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
