@@ -20,8 +20,30 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
-			theme = "tokyonight", -- match colorscheme
+			sections = {
+				lualine_c = {
+					{ "filename", path = 1 },
+				},
+			},
 			options = {
+				refresh = {
+					statusline = 1000,
+					refresh_time = 16, -- ~60fps
+					events = {
+						"WinEnter",
+						"BufEnter",
+						"BufWritePost",
+						"SessionLoadPost",
+						"FileChangedShellPost",
+						"VimResized",
+						"Filetype",
+						"CursorMoved",
+						"CursorMovedI",
+						"ModeChanged",
+					},
+				},
+				icons_enabled = true,
+				theme = "tokyonight",
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "", right = "" },
 				globalstatus = true,
