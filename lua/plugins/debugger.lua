@@ -115,7 +115,12 @@ return {
 			{
 				"<leader>dw",
 				function()
-					require("dap.ui.widgets").hover()
+					local widgets = require("dap.ui.widgets")
+					local hover = widgets.hover
+					local buf, win = hover()
+					if win then
+						vim.api.nvim_buf_set_keymap(buf, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+					end
 				end,
 				desc = "Widgets",
 			},
@@ -251,7 +256,7 @@ return {
 						"--timeout",
 						"0",
 						"${workspaceFolder}/test/integration/_beforeAll.test.js",
-						"${workspaceFolder}/test/integration/VELO-6721-program-with-ticket-as-distribution.js",
+						"${workspaceFolder}/test/integration/VELO-5573-tier-campaign-with-edge-cases.js",
 					},
 					cwd = "${workspaceFolder}",
 					env = function()

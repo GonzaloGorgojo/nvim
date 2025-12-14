@@ -44,12 +44,12 @@ return {
 				},
 				auto_install = true, -- automatically install missing parsers
 			})
-
-			vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+			vim.api.nvim_create_autocmd("FileType", {
 				callback = function()
 					vim.opt_local.foldmethod = "expr"
-					vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
+					vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 					vim.opt_local.foldlevel = 99
+					vim.opt_local.foldenable = true
 				end,
 			})
 

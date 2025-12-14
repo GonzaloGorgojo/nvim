@@ -22,13 +22,22 @@ return {
 		opts = {
 			sections = {
 				lualine_c = {
-					{ "filename", path = 1 },
+					{ "filename", path = 1, separator = " " },
+					{
+						require("noice").api.status.command.get,
+						cond = require("noice").api.status.command.has,
+						color = { fg = "#ff9e64" },
+					},
+					{
+						require("noice").api.status.mode.get,
+						cond = require("noice").api.status.mode.has,
+						color = { fg = "#ff9e64" },
+					},
 				},
 			},
 			options = {
 				refresh = {
 					statusline = 1000,
-					refresh_time = 16, -- ~60fps
 					events = {
 						"WinEnter",
 						"BufEnter",
@@ -37,8 +46,6 @@ return {
 						"FileChangedShellPost",
 						"VimResized",
 						"Filetype",
-						"CursorMoved",
-						"CursorMovedI",
 						"ModeChanged",
 					},
 				},
@@ -89,8 +96,8 @@ return {
 	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown", "codecompanion" },
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" },
-		---@module 'render-markdown'
 		opts = {
 			completions = {
 				lsp = { enabled = true },
@@ -101,8 +108,31 @@ return {
 		"zbirenbaum/copilot.lua",
 		event = "InsertEnter",
 		opts = {
+			copilot_node_command = vim.fn.expand("~/.nvm/versions/node/v22.17.1/bin/node"),
 			suggestion = { enabled = false }, -- disable ghost-text
 			panel = { enabled = false },
+		},
+	},
+	{
+		"olimorris/codecompanion.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		opts = {
+			interactions = {
+				chat = {
+					tools = {
+						opts = {
+							default_tools = {
+								"full_stack_dev",
+							},
+							system_prompt = {
+								enabled = true,
+							},
+						},
+					},
+				},
+			},
 		},
 	},
 }

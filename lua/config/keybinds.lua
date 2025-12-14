@@ -3,6 +3,8 @@ vim.g.mapleader = " " --set space as leader
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>") -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set("n", "<leader>w", ":write<CR>", { desc = "Save ([W]rite) file" })
 vim.keymap.set("n", "<leader>kk", vim.lsp.buf.hover, { desc = "LSP Hover" })
+--copy entire buffer
+vim.keymap.set("n", "<leader>cb", ":%y+<CR>", { desc = "Copy entire buffer" })
 
 -- Window navigation with Shift + hjkl
 vim.keymap.set("n", "<S-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })

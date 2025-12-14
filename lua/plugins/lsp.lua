@@ -27,7 +27,13 @@ return {
 			"zbirenbaum/copilot-cmp",
 			dependencies = { "zbirenbaum/copilot.lua" },
 			config = function()
-				require("copilot_cmp").setup()
+				require("copilot_cmp").setup({
+					formatters = {
+						insert_text = require("copilot_cmp.format").remove_existing,
+						label = require("copilot_cmp.format").remove_existing,
+						preview = require("copilot_cmp.format").preview,
+					},
+				})
 			end,
 		},
 	},
@@ -51,8 +57,8 @@ return {
 			},
 			completion = { completeopt = "menu,menuone,noinsert,noselect" },
 			mapping = cmp.mapping.preset.insert({
-				["<C-j>"] = cmp.mapping.select_next_item(),
-				["<C-k>"] = cmp.mapping.select_prev_item(),
+				["<Tab>"] = cmp.mapping.select_next_item(),
+				["<S-Tab>"] = cmp.mapping.select_prev_item(),
 				["<C-Space>"] = cmp.mapping.complete(),
 				["<CR>"] = cmp.mapping.confirm({ select = false }),
 			}),
