@@ -106,7 +106,6 @@ return {
 	},
 	{
 		"zbirenbaum/copilot.lua",
-		event = "InsertEnter",
 		opts = {
 			copilot_node_command = vim.fn.expand("~/.nvm/versions/node/v22.17.1/bin/node"),
 			suggestion = { enabled = false }, -- disable ghost-text
@@ -119,15 +118,28 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 		opts = {
-			interactions = {
+			display = {
 				chat = {
+					show_settings = true,
+				},
+			},
+
+			interactions = {
+				inline = {
+					adapter = "copilot",
+				},
+				cmd = {
+					adapter = "copilot",
+				},
+				chat = {
+					adapter = {
+						name = "copilot",
+						model = "claude-haiku-4.5",
+					},
 					tools = {
 						opts = {
 							default_tools = {
 								"full_stack_dev",
-							},
-							system_prompt = {
-								enabled = true,
 							},
 						},
 					},
