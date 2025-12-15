@@ -22,20 +22,6 @@ return {
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-nvim-lsp-signature-help", -- signature help
-		-- Copilot completion source:
-		{
-			"zbirenbaum/copilot-cmp",
-			dependencies = { "zbirenbaum/copilot.lua" },
-			config = function()
-				require("copilot_cmp").setup({
-					formatters = {
-						insert_text = require("copilot_cmp.format").remove_existing,
-						label = require("copilot_cmp.format").remove_existing,
-						preview = require("copilot_cmp.format").preview,
-					},
-				})
-			end,
-		},
 	},
 	config = function()
 		-- ==========================================
@@ -46,6 +32,11 @@ return {
 		luasnip.config.setup({})
 
 		cmp.setup({
+			view = {
+				docs = {
+					auto_open = true,
+				},
+			},
 			window = {
 				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
