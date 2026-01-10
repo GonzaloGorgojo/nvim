@@ -113,6 +113,28 @@ return {
 				desc = "Terminate",
 			},
 			{
+				"<leader>dT",
+				function()
+					local dap = require("dap")
+
+					-- end debug session
+					dap.terminate()
+					dap.disconnect()
+					dap.close()
+
+					-- stop integrated terminal job (this is the key part)
+					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+						if vim.bo[buf].buftype == "terminal" then
+							local chan = vim.b[buf].terminal_job_id
+							if chan then
+								vim.fn.jobstop(chan) -- sends SIGTERM
+							end
+						end
+					end
+				end,
+				desc = "Hard stop (kill Node)",
+			},
+			{
 				"<leader>dw",
 				function()
 					local widgets = require("dap.ui.widgets")
@@ -256,7 +278,7 @@ return {
 						"--timeout",
 						"0",
 						"${workspaceFolder}/test/integration/_beforeAll.test.js",
-						"${workspaceFolder}/test/integration/VELO-5573-tier-campaign-with-edge-cases.js",
+						"${workspaceFolder}/test/integration/VELO-6721-program-with-ticket-as-distribution.js",
 					},
 					cwd = "${workspaceFolder}",
 					env = function()
