@@ -46,3 +46,19 @@ end
 -- Sets how neovim will display certain whitespace characters in the editor.
 -- vim.opt.list = true
 -- vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣"}
+
+-- Auto-display images in WezTerm new window using imgcat
+vim.api.nvim_create_autocmd("BufReadPost", {
+	pattern = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.bmp", "*.svg" },
+	callback = function()
+		local file = vim.fn.expand("%:p")
+		-- Open new window with imgcat
+		vim.fn.system(
+			'wezterm cli spawn --new-window -- sh -c "wezterm imgcat '
+				.. vim.fn.shellescape(file)
+				.. "; echo; echo 'Press any key to close...'; read -n1\""
+		)
+		-- Close the buffer with binary content and go back to previous buffer
+		vim.cmd("bdelete!")
+	end,
+})
