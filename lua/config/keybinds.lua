@@ -49,3 +49,17 @@ vim.api.nvim_set_keymap(
 )
 
 vim.keymap.set("n", "<C-q>", ":bd<CR>", { desc = "Delete current buffer" })
+
+-- Toggle Copilot suggestions (stops/starts the Copilot LSP)
+vim.keymap.set("n", "<leader>tc", function()
+	local clients = vim.lsp.get_clients({ name = "copilot" })
+	if #clients > 0 then
+		-- Copilot is running, stop it
+		vim.lsp.stop_client(clients)
+		vim.notify("Copilot disabled")
+	else
+		-- Copilot is stopped, start it
+		vim.cmd("LspStart copilot")
+		vim.notify("Copilot enabled")
+	end
+end, { desc = "[T]oggle [C]opilot suggestions" })
