@@ -63,10 +63,7 @@ return {
 			require("nvim-highlight-colors").setup({})
 		end,
 	},
-	{ -- This helps with ssh tunneling and copying to clipboard
-		"ojroques/vim-oscyank",
-	},
-	{
+	{ -- Automatically detect indent settings
 		"tpope/vim-sleuth",
 	},
 	{ -- Highlight todo, notes, etc in comments
@@ -81,9 +78,9 @@ return {
 		version = "*",
 		config = function()
 			-- Better Around/Inside textobjects
+			--  - yinq - [Y]ank [I]nside [N]ext [Q]uote
 			-- Examples:
 			--  - va)  - [V]isually select [A]round [)]paren
-			--  - yinq - [Y]ank [I]nside [N]ext [Q]uote
 			--  - ci'  - [C]hange [I]nside [']quote
 			require("mini.ai").setup({ n_lines = 50 })
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
@@ -94,63 +91,13 @@ return {
 			require("mini.comment").setup()
 		end,
 	},
-	{
+	{ -- Render markdown files with preview
 		"MeanderingProgrammer/render-markdown.nvim",
-		ft = { "markdown", "codecompanion" },
+		ft = { "markdown" },
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" },
 		opts = {
 			completions = {
 				lsp = { enabled = true },
-			},
-		},
-	},
-	{
-		"zbirenbaum/copilot.lua",
-		opts = {
-			copilot_node_command = vim.fn.expand("~/.nvm/versions/node/v22.17.1/bin/node"),
-			suggestion = { enabled = false }, -- disable ghost-text
-			panel = { enabled = false },
-		},
-	},
-	{
-		"zbirenbaum/copilot-cmp",
-		dependencies = { "zbirenbaum/copilot.lua" },
-		config = function()
-			require("copilot_cmp").setup()
-		end,
-	},
-	{
-		"olimorris/codecompanion.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		opts = {
-			display = {
-				chat = {
-					show_settings = true,
-				},
-			},
-
-			interactions = {
-				inline = {
-					adapter = "copilot",
-				},
-				cmd = {
-					adapter = "copilot",
-				},
-				chat = {
-					adapter = {
-						name = "copilot",
-						model = "claude-haiku-4.5",
-					},
-					tools = {
-						opts = {
-							default_tools = {
-								"full_stack_dev",
-							},
-						},
-					},
-				},
 			},
 		},
 	},

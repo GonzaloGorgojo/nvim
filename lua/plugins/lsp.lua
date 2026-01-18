@@ -1,5 +1,5 @@
 return {
-	-- Main LSP + Completion Configuration
+	-- Main LSP Configuration
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		-- LSP installer & tooling
@@ -10,85 +10,15 @@ return {
 		-- LSP status UI
 		{ "j-hui/fidget.nvim", opts = {} },
 
-		-- Completion plugins
-		"hrsh7th/nvim-cmp", -- main completion plugin
-		"hrsh7th/cmp-nvim-lsp", -- LSP source
-		"hrsh7th/cmp-buffer", -- buffer words
-		"hrsh7th/cmp-path", -- filesystem paths
-		"hrsh7th/cmp-cmdline", -- command-line completions
-		"hrsh7th/cmp-nvim-lua", -- lua completions
-
-		-- Snippets
-		"L3MON4D3/LuaSnip",
-		"saadparwaiz1/cmp_luasnip",
-		"hrsh7th/cmp-nvim-lsp-signature-help", -- signature help
+		-- Blink.cmp for capabilities
+		"saghen/blink.cmp",
 	},
 	config = function()
 		-- ==========================================
-		-- Completion Setup
-		-- ==========================================
-		local cmp = require("cmp")
-		local luasnip = require("luasnip")
-		luasnip.config.setup({})
-
-		cmp.setup({
-			view = {
-				docs = {
-					auto_open = true,
-				},
-			},
-			window = {
-				completion = {
-					border = "rounded",
-				},
-				documentation = {
-					border = "rounded",
-				},
-			},
-			snippet = {
-				expand = function(args)
-					luasnip.lsp_expand(args.body)
-				end,
-			},
-			completion = { completeopt = "menu,menuone,noinsert,noselect" },
-			mapping = cmp.mapping.preset.insert({
-				["<Tab>"] = cmp.mapping.select_next_item(),
-				["<S-Tab>"] = cmp.mapping.select_prev_item(),
-				["<C-Space>"] = cmp.mapping.complete(),
-				["<CR>"] = cmp.mapping.confirm({ select = false }),
-			}),
-			sources = {
-				{ name = "copilot" },
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
-				{ name = "path" },
-				{ name = "buffer" },
-				{ name = "nvim_lsp_signature_help" },
-			},
-		})
-		cmp.setup.cmdline({ "/", "?" }, {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = {
-				{ name = "buffer" },
-			},
-		})
-		cmp.setup.cmdline(":", {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = cmp.config.sources({
-				{ name = "path" },
-			}, {
-				{ name = "cmdline" },
-			}),
-			matching = { disallow_symbol_nonprefix_matching = false },
-		})
-
-		-- ==========================================
 		-- LSP Setup
 		-- ==========================================
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
 		local servers = {
+			copilot = {},
 			html = {},
 			cssls = {},
 			tailwindcss = {},
@@ -96,6 +26,7 @@ return {
 			eslint = {},
 			prismals = {},
 			bashls = {},
+			ts_ls = {},
 			lua_ls = {
 				settings = {
 					Lua = {
@@ -127,8 +58,7 @@ return {
 			handlers = {
 				function(server_name)
 					local server = servers[server_name] or {}
-					server.capabilities =
-						vim.tbl_deep_extend("force", {}, capabilities, require("cmp_nvim_lsp").default_capabilities())
+					server.capabilities = require("blink.cmp").get_lsp_capabilities(server.capabilities)
 					require("lspconfig")[server_name].setup(server)
 				end,
 			},
