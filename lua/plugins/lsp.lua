@@ -3,7 +3,14 @@ return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		-- LSP installer & tooling
-		{ "williamboman/mason.nvim", opts = {} },
+		{
+			"williamboman/mason.nvim",
+			opts = {
+				ui = {
+					border = "rounded",
+				},
+			},
+		},
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 

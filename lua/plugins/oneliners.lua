@@ -9,8 +9,8 @@ return {
 				transparent = true, -- makes background transparent
 				terminal_colors = true, -- match terminal colors
 				styles = {
-					-- sidebars = "transparent",
-					-- floats = "transparent",
+					sidebars = "transparent",
+					floats = "transparent",
 				},
 			})
 			vim.cmd([[colorscheme tokyonight]])
@@ -21,6 +21,13 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			sections = {
+				lualine_a = {
+					{ "mode", separator = { left = "" } },
+				},
+				lualine_z = {
+					{ "location", separator = { right = "" } },
+				},
+
 				lualine_c = {
 					{ "filename", path = 1, separator = " " },
 					{

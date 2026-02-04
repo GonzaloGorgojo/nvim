@@ -278,7 +278,7 @@ return {
 						"--timeout",
 						"0",
 						"${workspaceFolder}/test/integration/_beforeAll.test.js",
-						"${workspaceFolder}/test/integration/VELO-7067-new-expiry-earning-rule.js",
+						"${workspaceFolder}/test/integration/VELO-7139-user-notifications-settings.js",
 					},
 					cwd = "${workspaceFolder}",
 					env = function()

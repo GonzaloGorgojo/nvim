@@ -22,7 +22,6 @@ return {
 			["<C-e>"] = { "hide" },
 			["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
 		},
-
 		appearance = {
 			nerd_font_variant = "mono",
 			kind_icons = {
@@ -56,13 +55,20 @@ return {
 		},
 
 		completion = {
+			list = {
+				selection = {
+					preselect = false, -- 👈 disable auto focus
+					auto_insert = false, -- extra safety: don’t auto insert
+				},
+			},
 			documentation = {
 				auto_show = true,
 				auto_show_delay_ms = 200,
 				window = {
 					border = "rounded",
-					max_width = 80,
-					max_height = 20,
+					max_width = 100,
+					max_height = 40,
+					winblend = 0,
 				},
 			},
 			menu = {
