@@ -41,6 +41,8 @@ return {
 					"vim",
 					"vimdoc",
 					"prisma",
+					"terraform",
+					"hcl", --terraform
 				},
 				auto_install = true, -- automatically install missing parsers
 			})

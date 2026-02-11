@@ -34,6 +34,7 @@ return {
 			prismals = {},
 			bashls = {},
 			ts_ls = {},
+			terraformls = {},
 			lua_ls = {
 				settings = {
 					Lua = {

@@ -52,6 +52,18 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				keymaps = {
 					initial_mode = "insert",
 				},
+				git_status = {
+					mappings = {
+						n = {
+							["<Tab>"] = actions.move_selection_next,
+							["<S-Tab>"] = actions.move_selection_previous,
+						},
+						i = {
+							["<Tab>"] = actions.move_selection_next,
+							["<S-Tab>"] = actions.move_selection_previous,
+						},
+					},
+				},
 			},
 			extensions = {
 				["ui-select"] = {

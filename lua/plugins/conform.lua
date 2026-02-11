@@ -78,6 +78,10 @@ return {
 				html = { "prettierd", "prettier" },
 				yaml = { "prettierd", "prettier" },
 				yml = { "prettierd", "prettier" },
+				handlebars = { "djlint" },
+				hcl = { "packer_fmt" },
+				terraform = { "terraform_fmt" },
+				tf = { "terraform_fmt" },
 
 				-- JavaScript / TypeScript / React
 				javascript = { "eslint_d", "prettierd", "prettier" },

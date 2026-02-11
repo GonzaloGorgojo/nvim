@@ -138,13 +138,19 @@ return {
 				"<leader>dw",
 				function()
 					local widgets = require("dap.ui.widgets")
-					local hover = widgets.hover
-					local buf, win = hover()
-					if win then
-						vim.api.nvim_buf_set_keymap(buf, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
-					end
+
+					widgets.hover(nil, {
+						border = "rounded",
+					})
+
+					local win = vim.api.nvim_get_current_win()
+					local buf = vim.api.nvim_get_current_buf()
+
+					vim.keymap.set("n", "q", function()
+						vim.api.nvim_win_close(win, true)
+					end, { buffer = buf, silent = true })
 				end,
-				desc = "Widgets",
+				desc = "DAP Hover",
 			},
 			{
 				"<leader>du",
@@ -253,42 +259,29 @@ return {
 				return env
 			end
 
-			dap.configurations.javascript = {
-				{
-					type = "pwa-node",
-					request = "launch",
-					name = "NVIM Launch base",
-					program = "${workspaceFolder}/index.js",
-					cwd = "${workspaceFolder}",
-					env = function()
-						local env_path = vim.fn.getcwd() .. "/config/.env"
-						return read_env_file(env_path)
-					end,
-					skipFiles = { "<node_internals>/**" },
-					console = "integratedTerminal",
-				},
-				{
-					type = "pwa-node",
-					request = "launch",
-					name = "NVIM Debug Integration Tests on base",
-					program = "${workspaceFolder}/node_modules/.bin/mocha",
-					args = {
-						"--bail",
-						"--exit",
-						"--timeout",
-						"0",
-						"${workspaceFolder}/test/integration/_beforeAll.test.js",
-						"${workspaceFolder}/test/integration/VELO-7139-user-notifications-settings.js",
-					},
-					cwd = "${workspaceFolder}",
-					env = function()
-						local env_path = vim.fn.getcwd() .. "/test/.env"
-						return read_env_file(env_path)
-					end,
-					skipFiles = { "<node_internals>/**" },
-					console = "integratedTerminal",
-				},
-			}
+			-- Load project-local DAP config (.nvim/dap.lua)
+			local function load_project_dap()
+				-- Clear existing configs (important when switching projects)
+				for ft, _ in pairs(dap.configurations) do
+					dap.configurations[ft] = {}
+				end
+
+				local local_dap = vim.fn.getcwd() .. "/.nvim/dap.lua"
+				if vim.fn.filereadable(local_dap) == 1 then
+					dofile(local_dap)
+					vim.notify("Loaded project DAP config", vim.log.levels.INFO)
+				end
+			end
+
+			-- Load on startup
+			load_project_dap()
+
+			-- Reload when changing directories
+			vim.api.nvim_create_autocmd("DirChanged", {
+				callback = function()
+					load_project_dap()
+				end,
+			})
 
 			dap.configurations.typescript = {
 				{
