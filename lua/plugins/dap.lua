@@ -242,23 +242,6 @@ return {
 					},
 				},
 			}
-
-			-- Helper function to read env file
-			local function read_env_file(filepath)
-				local env = {}
-				local file = io.open(filepath, "r")
-				if file then
-					for line in file:lines() do
-						local key, value = line:match("^([^=]+)=(.+)$")
-						if key and value then
-							env[key] = value
-						end
-					end
-					file:close()
-				end
-				return env
-			end
-
 			-- Load project-local DAP config (.nvim/dap.lua)
 			local function load_project_dap()
 				-- Clear existing configs (important when switching projects)
@@ -282,48 +265,8 @@ return {
 					load_project_dap()
 				end,
 			})
-
-			dap.configurations.typescript = {
-				{
-					type = "pwa-node",
-					request = "launch",
-					name = "NVIM Launch backend",
-					cwd = "${workspaceFolder}", -- project root
-					runtimeExecutable = "yarn", -- runs `yarn`
-					runtimeArgs = { "dev" }, -- passes `dev` to yarn
-					program = "${workspaceFolder}/src/main.ts", -- required by pwa-node but ignored for yarn scripts
-					console = "integratedTerminal",
-					env = function()
-						local env_path = vim.fn.expand("${workspaceFolder}") .. "/.env"
-						local env = read_env_file(env_path)
-						return env
-					end,
-					skipFiles = { "<node_internals>/**" },
-					sourceMaps = true,
-					protocol = "inspector",
-				},
-				{
-					type = "pwa-node",
-					request = "launch",
-					name = "NVIM Launch Seed",
-					cwd = "${workspaceFolder}", -- project root
-					runtimeExecutable = "yarn", -- runs `yarn`
-					runtimeArgs = { "prisma:seed" }, -- passes `dev` to yarn
-					program = "${workspaceFolder}/src/main.ts", -- required by pwa-node but ignored for yarn scripts
-					console = "integratedTerminal",
-					env = function()
-						local env_path = vim.fn.expand("${workspaceFolder}") .. "/.env"
-						local env = read_env_file(env_path)
-						return env
-					end,
-					skipFiles = { "<node_internals>/**" },
-					sourceMaps = true,
-					protocol = "inspector",
-				},
-			}
 		end,
 	},
-
 	-- Optional: Mason integration to auto-install js-debug-adapter
 	{
 		"jay-babu/mason-nvim-dap.nvim",
